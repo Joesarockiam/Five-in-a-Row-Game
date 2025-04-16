@@ -15,7 +15,10 @@ exports.startNewGame = async (req, res) => {
 // Handle user move
 exports.userMove = async (req, res) => {
   try {
-    const { gameId, row, col } = req.body;
+    const { gameId } = req.params;
+    const { row, col } = req.body;
+    console.log(gameId);
+    
 
     const game = await Game.findById(gameId);
     if (!game || game.isGameOver) {
@@ -39,7 +42,7 @@ exports.userMove = async (req, res) => {
 // Handle AI move
 exports.aiMove = async (req, res) => {
   try {
-    const { gameId } = req.body;
+    const { gameId } = req.params;
     const move = await handleAIMove(gameId);
     res.status(200).json({ message: 'AI moved', move });
   } catch (error) {
