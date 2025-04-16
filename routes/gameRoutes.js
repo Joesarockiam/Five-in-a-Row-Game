@@ -1,15 +1,9 @@
 const express = require('express');
-const { createGame, makeMove, getGame } = require('../controllers/gameController');
-
 const router = express.Router();
+const gameController = require('../controllers/gameController');
 
-// Create a new game
-router.post('/start', createGame);
-
-// Make a move
-router.post('/move', makeMove);
-
-// Get game state
-router.get('/:id', getGame);
+router.post('/new-game', gameController.startNewGame);
+router.post('/:gameId/move/user', gameController.userMove);
+router.get('/:gameId/move/ai', gameController.aiMove);
 
 module.exports = router;
