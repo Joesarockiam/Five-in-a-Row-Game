@@ -3,7 +3,7 @@ const Game = require('../models/Game');
 // Save current game state (on restart)
 exports.saveBoard = async (req, res) => {
   try {
-    const { gameId } = req.body;
+    const { gameId } = req.params;
     const game = await Game.findById(gameId);
     if (!game) return res.status(404).json({ message: 'Game not found' });
 
